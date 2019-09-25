@@ -1,0 +1,50 @@
+load('zxyp.mat')
+Fs=16000;
+%tt=66,479_92.54
+%tt=66,500_92.54
+% tt=[120/(2*pi),6000/(2*pi);
+%     120/(2*pi),4000/(2*pi);
+%     120/(2*pi),4200/(2*pi);
+%     120/(2*pi),4500/(2*pi);
+%     120/(2*pi),5000/(2*pi);
+%     120/(2*pi),2000/(2*pi);
+%     120/(2*pi),4000/(2*pi)];-91.15分
+tt=[625/(2*pi),3015/(2*pi);
+   415/(2*pi),3015/(2*pi);
+    415/(2*pi),3015/(2*pi);
+    415/(2*pi),3015/(2*pi);
+    415/(2*pi),3015/(2*pi);
+    280/(2*pi),3015/(2*pi);
+    415/(2*pi),3015/(2*pi)];
+x1=[];
+
+for i=1:1:7
+x1=detrend(axm1(:,i));
+s1=x1/max(abs(x1));
+yy1 = lvboqi2(s1,tt(i,1),tt(i,2));
+
+x2=detrend(axm2(:,i));
+s2=x2/max(abs(x2));
+yy2 = lvboqi2(s2,tt(i,1),tt(i,2));
+
+yy=yy1+yy2;
+
+filename1 = (['LiuLiFu_HDU_preliminaries_0',num2str(i),'_Algorithm.wav']); %给文件取名
+audiowrite(filename1,yy,16000)
+end
+% filename1 = (['LiuLiFu_HDU_preliminaries_0',num2str(i),'_Algorithm.wav']); %给文件取名
+% audiowrite(filename1,yy(:,1),16000)
+% filename2 = ('LiuLiFu_HDU_preliminaries_02_Algorithm.wav'); %给文件取名
+% audiowrite(filename2,yy(:,2),16000)
+% filename3 = ('LiuLiFu_HDU_preliminaries_03_Algorithm.wav'); %给文件取名
+% audiowrite(filename3,yy(:,3),16000)
+% filename4 = ('LiuLiFu_HDU_preliminaries_04_Algorithm.wav'); %给文件取名
+% audiowrite(filename4,yy(:,4),16000)
+% filename5 = ('LiuLiFu_HDU_preliminaries_05_Algorithm.wav'); %给文件取名
+% audiowrite(filename5,yy(:,5),16000)
+% filename6 = ('LiuLiFu_HDU_preliminaries_06_Algorithm.wav'); %给文件取名
+% audiowrite(filename6,yy(:,6),16000)
+% filename7 = ('LiuLiFu_HDU_preliminaries_07_Algorithm.wav'); %给文件取名
+% audiowrite(filename7,yy(:,7),16000)
+
+
