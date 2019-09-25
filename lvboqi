@@ -1,0 +1,18 @@
+ function [ yy1 ] = lvboqi2(s,Fp1,Fs1)
+
+% Fp1 = 66;
+% Fs1 = 479;
+Ft = 16000;
+wp = 2*pi*Fp1/Ft;%通帶截止頻率 
+ws = 2*pi*Fs1/Ft;%阻帶截止頻率
+rp = 8;
+rs = 8.99;
+p = 1-10.^(-rp/20); %通帶阻帶波紋
+s1 = 10.^(-rs/20);
+fpts = [wp ws];
+mag = [1 0];
+dev = [p s1];
+[n21,wn21,beta,ftype1] = kaiserord(fpts,mag,dev);%kaiserord求階數截止頻率
+b21 = fir1(n21,wn21,kaiser(n21+1,beta)); %由fir1設計濾波器
+yy1 = fftfilt(b21,s);
+ end
